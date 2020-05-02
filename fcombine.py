@@ -14,10 +14,14 @@ def main():
     # Now we iterate over each argument and do work on it
     for arg in args:
         # Open the argument as file (this is because we are passing files in as arguments)
-        with open(arg) as file:
-            # Here we set the output of a our list comprehension into fileSet
-            # [i.strip() for i in file] goes over all the contents in the file and runs .strip() on them to remove things like \n
-            fileSet += [i.strip() for i in file]
+        try:
+            with open(arg) as file:
+                # Here we set the output of a our list comprehension into fileSet
+                # [i.strip() for i in file] goes over all the contents in the file and runs .strip() on them to remove things like \n
+                fileSet += [i.strip() for i in file]
+        except:
+            print(f"{arg} does not exist, try again.")
+            exit()
     # Now we iterate over our list as a set which will remove all duplicates
     for i in set(fileSet):
         # Then just print them, we can redirect this to a file using > file.txt
